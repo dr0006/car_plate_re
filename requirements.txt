@@ -8,3 +8,5 @@ onnxruntime==1.8.1
 # python-multipart==0.0.6
 # uvicorn==0.23.2
 # requests==2.31.0
+
+PyQt5==5.15.9

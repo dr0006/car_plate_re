@@ -3,7 +3,7 @@
 @File  : test.py
 @author: FxDr
 @Time  : 2023/09/25 17:57
-@Description:
+@Description: 学习使用lpr3模块来进行车牌识别
 """
 
 # -------------------------------
@@ -15,6 +15,7 @@
 # print(catcher(image))
 
 # --------------------------------
+
 
 # 导入cv相关库
 import cv2
