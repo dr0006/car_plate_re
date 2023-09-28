@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-@File  : test.py
+@File  : demo.py
 @author: FxDr
 @Time  : 2023/09/25 17:57
 @Description: 学习使用lpr3模块来进行车牌识别
@@ -45,7 +45,7 @@ font_ch = ImageFont.truetype("../font/platech.ttf", 20, 0)
 # 实例化识别对象
 catcher = lpr3.LicensePlateCatcher(detect_level=lpr3.DETECT_LEVEL_HIGH)
 # 读取图片
-image = cv2.imread("../images/car4.jpg")
+image = cv2.imread("../../images/car4.jpg")
 
 # 执行识别算法
 results = catcher(image)
