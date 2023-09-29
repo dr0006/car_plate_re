@@ -152,4 +152,5 @@ cython_debug/
 #.idea/
 /data/
 .gitattributes
-/idea/
+/.idea/
+/car_plate_re.iml

@@ -24,7 +24,7 @@ from PIL import ImageFont
 from PIL import Image
 from PIL import ImageDraw
 # 导入依赖包
-import hyperlpr3 as lpr3
+import hyperlpr3 as lpr3  # pip安装的环境中的lpr3
 
 
 def draw_plate_on_image(img, box, text, font):
@@ -40,12 +40,12 @@ def draw_plate_on_image(img, box, text, font):
 
 
 # 中文字体加载
-font_ch = ImageFont.truetype("../font/platech.ttf", 20, 0)
+font_ch = ImageFont.truetype("../../font/platech.ttf", 20, 0)
 
 # 实例化识别对象
 catcher = lpr3.LicensePlateCatcher(detect_level=lpr3.DETECT_LEVEL_HIGH)
 # 读取图片
-image = cv2.imread("../../images/car4.jpg")
+image = cv2.imread("../images/img.png")
 
 # 执行识别算法
 results = catcher(image)

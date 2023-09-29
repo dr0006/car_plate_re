@@ -41,7 +41,7 @@ class LicensePlateRecognitionApp(QMainWindow):
         left_layout = QVBoxLayout()
 
         # 创建一个中文字体
-        self.font_ch = ImageFont.truetype("../font/platech.ttf", 20, 0)
+        self.font_ch = ImageFont.truetype("../.././font/platech.ttf", 20, 0)
 
         # 创建识别器
         self.catcher = lpr3.LicensePlateCatcher(detect_level=lpr3.DETECT_LEVEL_HIGH)
@@ -113,7 +113,8 @@ class LicensePlateRecognitionApp(QMainWindow):
         try:
             if self.image_path:
                 # 读取图片
-                image = cv2.imread(self.image_path)
+                # image = cv2.imread(self.image_path)
+                image = cv2.imdecode(np.fromfile(self.image_path, dtype=np.uint8), -1)  # 解决中文路径报错
 
                 # 执行识别算法
                 results = self.catcher(image)
