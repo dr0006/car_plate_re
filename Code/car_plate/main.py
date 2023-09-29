@@ -32,8 +32,8 @@ def infor_write(img, rect, result):
     pilimg = Image.fromarray(cv2img)
     draw = ImageDraw.Draw(pilimg)
     # font = ImageFont.truetype("simhei.ttf", 20, encoding="utf-8")
-    font = ImageFont.truetype(r"X:\Coding\Github\car_plate_re\font\platech.ttf", 20, encoding="utf-8")
-    draw.text((rect[2], rect[1]), str(text), (0, 255, 0), font=font)
+    # font = ImageFont.truetype(r"X:\Coding\Github\car_plate_re\font\platech.ttf", 20, encoding="utf-8")
+    # draw.text((rect[2], rect[1]), str(text), (0, 255, 0), font=font) # 你太丑了我不要你绘制
     cv2charimg = cv2.cvtColor(np.array(pilimg), cv2.COLOR_RGB2BGR)
     return cv2charimg
 
@@ -56,6 +56,8 @@ def plt_show(img):
 def gray_gauss(img):
     img = cv2.GaussianBlur(img, (1, 1), 0)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    cv2.imshow("gray", gray)
+    cv2.waitKey(0)
     return gray
 
 
@@ -64,6 +66,8 @@ def img_resize(img):
     a = 400 * img.shape[0] / img.shape[1]
     a = int(a)
     img = cv2.resize(img, (400, a))
+    cv2.imshow("img_resize", img)
+    cv2.waitKey(0)
     return img
 
 
@@ -71,6 +75,7 @@ def img_resize(img):
 def Sobel_detect(img):
     Sobel_x = cv2.Sobel(img, cv2.CV_16S, 1, 0)
     absX = cv2.convertScaleAbs(Sobel_x)
+    cv2.imshow("Sobel_detect", absX)
     return absX
 
 
@@ -93,7 +98,7 @@ def locate_license(img, orgimg):
         a = (r[2] - r[0]) * (r[3] - r[1])  # r=[min(y),min(x),max(y),max(x)]
         s = (r[2] - r[0]) / (r[3] - r[1])
         # 根据轮廓形状特点，确定车牌的轮廓位置并截取图像
-        if (w > (h * 3)) and (w < (h * 5)):
+        if (w > (h * 2)) and (w < (h * 4)):
             # img=oriimg[y:y+h,x:x+w]
             # cv2.rectangle(oriimg, (x, y), (x+w, y+h), (0, 255, 0), 2)
             blocks.append([r, a, s])
@@ -144,6 +149,8 @@ def find_license_points(img, org_img):
     img = cv2.dilate(img, kernel_y)
     blur = cv2.medianBlur(img, 15)
     rect = locate_license(blur, org_img)
+    cv2.imshow("license", blur)
+    cv2.waitKey(0)
     return rect, blur
 
 
@@ -160,7 +167,13 @@ def segment_characters(rect_list, org_img):
 
 # 主函数区
 if __name__ == '__main__':
-    img = cv2.imread(r'./images/img.png')
+    # img = cv2.imread(r'./images/img.png')
+    # im_name = r'./images/川A88888.jpg' # 正常
+    # im_name = r'./images/川A09X20.jpg' # 正常
+    # im_name = r'./images/皖P77222.jpg' # 未找到车牌轮廓
+    # im_name = r'./images/粤AAB457.JPG' # OCR是否返回结果? [None]
+    im_name = r'./images/img_4.png'
+    img = cv2.imdecode(np.fromfile(im_name, dtype=np.uint8), -1)  # 解决图片带中文路径报错
     img = img_resize(img)
     oriimg = img.copy()
     rect, img = find_license_points(img, oriimg)
@@ -168,18 +181,24 @@ if __name__ == '__main__':
     if rect is not None:
         result = segment_characters(rect, oriimg)
         # 在图像上绘制车牌号
-        text_x = rect[0] + 10  # 调整文本的X坐标
-        text_y = rect[1] + 10  # 调整文本的Y坐标
-        text_color = (0, 255, 0)  # 文本颜色为绿色
+        text_x = rect[0] + 20  # 调整文本的X坐标
+        text_y = rect[1] - 30  # 调整文本的Y坐标
+        # text_color = (0, 255, 0)  # 文本颜色为绿色
+        text_color = (0, 0, 255)  # 文本颜色
         text = ""
         confidence = ""
+        # print("result", result)
         for lst in result:
-            text, confidence = lst[0][1]
-            print("车牌为：{}\n置信度为:{}".format(text, confidence))
+            try:
+                text, confidence = lst[0][1]
+                print("车牌为：{}\n置信度为:{}".format(text, confidence))
+            except:
+                print("OCR是否返回结果?", result)
             oriimg = infor_write(oriimg, rect, lst)
-        text = text[:2] + text[3:]  # 去掉车牌信息中的 · 点，因为绘制不出来，显示为方框
-        oriimg = ChineseText.cv2img_add_text(oriimg, text, text_x, text_y)
+            text = text[:2] + text[3:]  # 去掉车牌信息中的 · 点，因为绘制不出来，显示为方框
+
         cv2.rectangle(oriimg, (rect[0], rect[1]), (rect[2], rect[3]), (0, 255, 0), 2)
+        oriimg = ChineseText.cv2img_add_text(oriimg, text, text_x, text_y, text_color=text_color)
         cv2.imshow('oriimg', oriimg)
         cv2.waitKey()
     else:

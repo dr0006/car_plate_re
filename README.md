@@ -54,16 +54,24 @@ onnxruntime.InferenceSession(..., providers=['AzureExecutionProvider', 'CPUExecu
 3. lpr3文件夹下是导入lpr3库的一个车牌识别的测试和UI界面
     1. 支持从文件中选择图片，包括带中文路径的图片
     2. 选择之后可以车牌识别，并把识别结果显示在窗口上
+4. license_plate_re:
+    1. 基于openCV的SVM模型预测车牌,图像处理图像分割解析字符
 
 -------------------------------------------------------------------------------
 
-### 效果图
+## 效果图
 
-##### car_plate
+### car_plate
 
 ![img](./Code/car_plate/img.png)    
 ![img_1](./Code/car_plate/img_1.png)
+![img_2](./Code/car_plate/img_2.png)
 
-#### lpr3
+### lpr3
 
-![img](./Code/lpr3/img.png)  
+![img](./Code/lpr3/img.png)
+
+### license_plate_re
+
+![img](./Code/license_plate_re/img.png)  
+![img_1](./Code/license_plate_re/img_1.png)
