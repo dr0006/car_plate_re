@@ -1,0 +1,44 @@
+<!--fxx-->
+<!--Author: FxDr-->
+<!--Created Time: 2023/09/30 18:04-->
+<!--Filename: plate_display.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>车牌识别结果</title>
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1 class="text-center">车牌识别结果</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>车牌号</th>
+      <th>识别结果</th>
+      <th>置信度</th>
+      <th>时间戳</th>
+      <th>图片</th> <!-- 新增图片列 -->
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in plate_recognition_data %}
+    <tr>
+      <td>{{ row.id }}</td>
+      <td>{{ row.plate_number }}</td>
+      <td>{{ row.recognition_result }}</td>
+      <td>{{ row.confidence }}</td>
+      <td>{{ row.timestamp }}</td>
+      <td><img src="data:image/jpeg;base64,{{ row.image_data|b64encode }}" alt="车牌图片" width="100"></td> <!-- 显示图片 -->
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script src="../static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -42,6 +42,8 @@ for code, confidence, type_idx, box in results:
     # 解析数据并绘制
     text = f"{code} - {confidence:.2f}"
     image = draw_plate_on_image(image, box, text, font=font_ch)
+    print("车牌号为:{},置信度为:{}".format(code, confidence))
+    # print(results)
 
 # 显示检测结果
 cv2.imshow("w", image)
