@@ -29,7 +29,7 @@
 
 ## hyperlpr3库
 
-[仓库连接](https://github.com/szad670401/HyperLPR)
+[仓库链接](https://github.com/szad670401/HyperLPR)
 
 - opencv-python (>3.3)
 - onnxruntime (>1.8.1)
