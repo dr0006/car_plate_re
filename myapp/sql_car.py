@@ -6,7 +6,6 @@
 @Description:
 """
 import os
-import time
 
 import pymysql  # 用于mysql的操作
 from config import config_by_name

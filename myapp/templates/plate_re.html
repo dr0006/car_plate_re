@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--    导入css-->
     <link rel="stylesheet" href="../static/css/plate_re.css">
     <!--    <link rel="stylesheet" href="../static/css/bootstrap.min.css">-->
     <title>车牌识别</title>
@@ -26,6 +27,7 @@
         <input type="file" id="image_file" name="image_file" accept="image/*" required>
     </div>
     <br>
+    <!--    (lpr3)-->
     <button type="submit" class="btn btn-primary">上传并识别</button>
 </form>
 
@@ -45,22 +47,12 @@
 
 {% endif %}
 
+<!-- 导入js文件  -->
+<script src="../static/js/plate_re.js"></script>
 <script>
-    // 退出登录按钮绑定事件
-    // 获取按钮元素
-    let logoutButton = document.getElementById('logoutButton');
-
-    // 为按钮添加点击事件处理
-    logoutButton.addEventListener('click', function () {
-        // 重定向
-        window.location.href = '/plate_re/logout';
-    });
-
     // 上传识别记录按钮绑定事件
     // 获取按钮元素
     let uploadButton = document.getElementById('uploadButton');
-
-    // 添加点击事件监听器
     uploadButton.addEventListener('click', function () {
         // 获取页面中的 plate_number 值
         let plate_number = "{{ plate_number }}";
@@ -68,16 +60,6 @@
         let confidence = "{{ confidence }}";
         // 重定向到/uploadBT路由，将plate_number和confidence作为查询参数传递
         window.location.href = `/plate_re/uploadBT?plate_number=${plate_number}&confidence=${confidence}`;
-    });
-
-    // 展示识别数据按钮绑定事件
-    // 获取按钮元素
-    let displayButton = document.getElementById('displayButton');
-
-    // 为按钮添加点击事件处理
-    displayButton.addEventListener('click', function () {
-        // 在新标签中打开页面
-        window.open('/plate_re/plate_display', '_blank');
     });
 </script>
 </body>

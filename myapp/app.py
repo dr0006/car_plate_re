@@ -15,6 +15,7 @@ from config import config_by_name
 from sql_car import create_user, sql_login, sql_connection, sql_reload
 
 # 导入车牌识别代码
+# from plate_re import lpr3_re, license_plate_re
 from plate_re import lpr3_re
 
 
@@ -123,7 +124,7 @@ def create_app(config_name):
                 <script>
                     // 页面加载时触发弹窗
                     window.onload = function() {
-                        alert("Logged out successfully!！");
+                        alert("Logged out successfully!");
                         //重定向
                         window.location.href = '/login'
                     };
@@ -131,7 +132,7 @@ def create_app(config_name):
                 '''
         return alert_script  # 'Logged out successfully!'
 
-    # 识别车牌页面
+    # 识别车牌页面lpr3
     @app.route('/plate_re', methods=['GET', 'POST'])
     @login_required
     def plate_re():
@@ -197,12 +198,13 @@ def create_app(config_name):
     @app.route('/plate_re/plate_display')
     @login_required
     def plate_recognition():
+        user_email = session['user_email']
         try:
             # 连接数据库
             cursor, db = sql_connection()
 
             # 查询车牌识别结果数据
-            cursor.execute("SELECT * FROM car_plate")
+            cursor.execute("SELECT * FROM car_plate WHERE user_email = %s", (user_email,))
             plate_recognition_data = cursor.fetchall()
             if plate_recognition_data is None:
                 return "表中暂无数据"
@@ -214,5 +216,39 @@ def create_app(config_name):
             return render_template('plate_display.html', datas=plate_recognition_data)
         except Exception as e:
             return str(e)
+
+    # 弃用
+    # # 车牌识别页面,license_plate_re
+    # @app.route('/plate_re2', methods=['GET', 'POST'])
+    # @login_required
+    # def plate_re2():
+    #     plate_dict = {}  # 保存plate_re,license_plate_re返回的结果
+    #     plate_number = None
+    #     confidence = None
+    #     image_path = None  # 保存上传的图片地址
+    #     # img_path_dict = {}  # 保存处理之后的tmp文件夹内的图片
+    #
+    #     if request.method == 'POST':
+    #         if 'image_file' not in request.files:
+    #             return "未选择图像文件"
+    #
+    #         try:
+    #             image_file = request.files['image_file']
+    #             if image_file:
+    #                 # 保存上传的图像文件
+    #                 image_path = "static/images/uploaded_image2.png"
+    #                 image_file.save(image_path)
+    #                 plate_dict = license_plate_re(image_path)
+    #
+    #             return render_template('plate_re2.html', image_path=plate_dict['path1'],
+    #                                    image_path2=plate_dict['path2'],
+    #                                    plate_number=plate_dict['plate_str'],
+    #                                    plate_color=plate_dict['plate_color'],
+    #                                    flag=plate_dict['flag'])
+    #         except Exception as e:
+    #             return str(e)
+    #
+    #     return render_template('plate_re2.html', image_path=image_path, plate_number=plate_number,
+    #                            confidence=confidence)
 
     return app

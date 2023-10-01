@@ -1,0 +1,43 @@
+<!--fxx-->
+<!--Author: FxDr-->
+<!--Created Time: 2023/10/01 23:14-->
+<!--Filename: plate_re2.html -->
+<!--# 弃用-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>车牌识别</title>
+</head>
+<body>
+
+<h1>车牌识别</h1>
+<button type="button" class="btn-danger" id="logoutButton">退出登录</button>
+
+<form method="POST" action="/plate_re2" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="image_file">选择图像文件:</label>
+        <input type="file" id="image_file" name="image_file" accept="image/*" required>
+    </div>
+    <br>
+    <!--    Code.license_plate_re  -->
+    <button type="submit" class="btn btn-primary">上传并识别</button>
+</form>
+
+<!-- 车牌识别结果部分 -->
+{% if image_path %}
+    <h2>车牌识别结果：</h2>
+    <p>车牌号码: {{ plate_number }}</p>
+    <p>车牌颜色: {{ plate_color }}</p>
+    <h3>识别图像：</h3>
+    <img src="{{ image_path }}" alt="识别图像" width="400">
+    <h3>处理后的图像：</h3>
+    <img src="{{ image_path2 }}" alt="处理后的图像" width="400">
+    {% if flag %}
+    <p>识别成功</p>
+    {% else %}
+    <p>识别失败</p>
+    {% endif %}
+{% endif %}
+</body>
+</html>

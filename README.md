@@ -6,6 +6,25 @@
 
 --------------------------------
 
+# 目录
+
+- [CODE车牌识别](#简单车牌识别模型训练)
+- [car_plate](#carplate)
+- [lpr3](#lpr3)
+- [license_plate_re](#licenseplatere)
+- [flask+car_plate_re]()
+
+----------------------------------------------------------
+
+1. 三种车牌识别，代码放在Code文件夹下
+2. 然后根据flask写了一个网页来展示和调用车牌识别
+3. 采用flask+css等一些前端的东西，数据库采用mysql,用python的pymysql库来操作
+4. 把识别数据写入数据库，然后一些展示
+5. 前端css没怎么写，页面美化在本项目中不是重点
+6. 美化可选择bootstrap
+
+----------------------------------------------------------
+
 ## hyperlpr3库
 
 [仓库连接](https://github.com/szad670401/HyperLPR)
@@ -75,3 +94,36 @@ onnxruntime.InferenceSession(..., providers=['AzureExecutionProvider', 'CPUExecu
 
 ![img](./Code/license_plate_re/img.png)  
 ![img_1](./Code/license_plate_re/img_1.png)
+
+## myapp
+
+### 项目结构
+
+- *static*
+    - 存放一些文件，比如css、js、images
+- *templates*
+    - flask的模板文件夹,里面放html文件
+- *app.py*
+    - 路由
+- *config.py*
+    - 配置文件
+- *requirements.txt*
+    - 依赖
+- *run.py*
+    - 运行
+- *sql_car.py*
+    - 一些关于数据库操作的方法我放在里面了
+
+### 运行图
+
+> 选择文件->上传并识别  
+> 可选择上传识别记录以及查看记录  
+> 图片采用保存在本地，放数据库不太方便  
+> 在static下的re_image下，会根据用户邮箱创建一个邮箱的文件夹，然后里面放该用户的识别图片  
+> re_image文件夹未上传到github   
+> 其实图片想放在图床来着，但是就这样吧
+
+![img](./images/img.png)  
+![img_1](./images/img_1.png)  
+![img_2](./images/img_2.png)  
+![img_3](./images/img_3.png)  

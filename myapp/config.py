@@ -11,7 +11,7 @@ import os
 
 class Config:
     # 通用配置
-    DEBUG = True  # debug 开启
+    DEBUG = True  # debug 开启 在生产中不要开debug
     SECRET_KEY = os.environ.get('SECRET_KEY', '5201314')
     # MySQL 数据库配置
     MYSQL_CONFIG = {

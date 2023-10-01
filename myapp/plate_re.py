@@ -3,7 +3,7 @@
 @File  : plate_re.py
 @author: FxDr
 @Time  : 2023/09/30 23:37
-@Description:
+@Description:车牌识别相关
 """
 import cv2
 # 导入Code相关
@@ -57,22 +57,29 @@ def lpr3_re(image_path):
     return plate_dict
 
 
-def license_plate_re(pic_path):
-    predictor = predict.CardPredictor()
-    predictor.train_svm()
-    img_bgr = img_math.img_read(pic_path)  # 读取图片可带中文路径
-    cv2.imshow("img", img_bgr)
-    cv2.waitKey(0)
-
-    first_img, oldimg = predictor.img_first_pre(img_bgr)
-
-    plate_str, roi, plate_color = predictor.img_only_color(oldimg,
-                                                           oldimg, first_img)
-
-    # print("车牌颜色:{}\n车牌为{}".format(plate_color, plate_str))
-    car_dict = {'plate_color': plate_color, 'plate_str': plate_str}
-    if roi is not None and roi.shape[0] > 0 and roi.shape[1] > 0:
-        print("车牌区域有效")
-    else:
-        print("无效的车牌区域")
-    return car_dict
+# 弃用
+# def license_plate_re(pic_path):
+#     image_path2 = None
+#     predictor = predict.CardPredictor()
+#     predictor.train_svm()
+#     img_bgr = img_math.img_read(pic_path)  # 读取图片可带中文路径
+#     # cv2.imshow("img", img_bgr)
+#     # cv2.waitKey(0)
+#
+#     first_img, oldimg = predictor.img_first_pre(img_bgr)
+#
+#     plate_str, roi, plate_color = predictor.img_only_color(oldimg,
+#                                                            oldimg, first_img)
+#
+#     # print("车牌颜色:{}\n车牌为{}".format(plate_color, plate_str))
+#     if roi is not None and roi.shape[0] > 0 and roi.shape[1] > 0:
+#         print("车牌区域有效")
+#         image_path2 = "static/images/recognized_image2.png"  # 裁剪的车牌图片的地址
+#         cv2.imwrite("static/images/recognized_image2.png", roi)
+#         flag = True
+#     else:
+#         print("无效的车牌区域")
+#         flag = False
+#     car_dict = {'plate_color': plate_color, 'plate_str': plate_str, 'path1': pic_path, 'path2': image_path2,
+#                 'flag': flag}
+#     return car_dict
