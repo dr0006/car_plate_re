@@ -1,8 +1,7 @@
 import os
 import cv2
 import numpy as np
-import img_math
-import img_recognition
+from Code.license_plate_re import img_math as img_math  # 本来是import img_math 即可，但是在flask中引用需要修改一下，不然报错说没有该模块
 
 SZ = 20  # 训练图片长宽
 MAX_WIDTH = 1000  # 原始图片最大宽度

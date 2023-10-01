@@ -154,3 +154,4 @@ cython_debug/
 .gitattributes
 /.idea/
 /car_plate_re.iml
+/myapp/static/re_image/

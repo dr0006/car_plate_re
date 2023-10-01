@@ -27,9 +27,10 @@ ALTER TABLE users
 CREATE TABLE car_plate
 (
     id                 INT AUTO_INCREMENT PRIMARY KEY,
-    plate_number       VARCHAR(20) NOT NULL,
-    image_data         BLOB        NOT NULL, -- 用于存储图片
+    user_email         VARCHAR(255),                       -- 用户邮箱列
+    image_url          VARCHAR(255) NOT NULL,              -- 用于存储图片
     recognition_result VARCHAR(50),
     confidence         FLOAT,                              -- 置信度列
     timestamp          TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- 时间戳，记录识别操作的时间
 );
+

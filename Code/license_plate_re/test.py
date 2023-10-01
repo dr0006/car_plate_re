@@ -41,6 +41,6 @@ def pic(pic_path):
 
 # pic(r"./pic/川A88888.jpg") # 识别正确
 pic(r"./pic/img_4.png")  # 识别正确
-# pic(r"./pic/川A09X20.jpg") # 识别不当 框出车牌但是不完全准确
+# pic(r"./pic/川A09X20.jpg")  # 识别不当 框出车牌但是不完全准确
 # pic(r"./pic/粤AAB457.JPG")# 识别不当 无法找到车牌位置
 # pic(r"./pic/皖P77222.jpg")  # 识别不当 找到车牌位置错误

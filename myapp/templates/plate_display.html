@@ -5,40 +5,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>车牌识别结果</title>
-  <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>车牌识别结果</title>
+    <!-- 引入Bootstrap的CDN -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="../static/css/bootstrap.min.css">-->
+    <style>
+        /* 自定义样式 */
+        .custom-card {
+            width: 350px;
+            margin: 20px; /* 控制卡片之间的间距 */
+            border: 1px solid #ccc; /* 添加边框样式 */
+        }
+
+        .card-img-top {
+            max-height: 20%;
+            object-fit: cover;
+        }
+
+        #img_Re {
+            width: 350px;
+            height: 350px;
+        }
+
+        /*p标签美化，主要是识别结果文字展示的美化*/
+        p {
+            color: #333; /* 文字颜色为深灰色 */
+            font-size: 16px; /* 文字大小为16像素 */
+            /*line-height: 1.5; !* 行高为文本大小的1.5倍 *!*/
+
+            /*让背景颜色和边框的长度与标签文字一样，可以用inline-block*/
+            display: inline-block;
+            background-color: #f2f2f2; /* 浅灰色背景 */
+            border: 1px solid #ccc; /* 1像素灰色边框 */
+            padding: 5px; /* 可选的填充 */
+            margin-top: 1px; /* 间隔*/
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-  <h1 class="text-center">车牌识别结果</h1>
-  <table class="table">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>车牌号</th>
-      <th>识别结果</th>
-      <th>置信度</th>
-      <th>时间戳</th>
-      <th>图片</th> <!-- 新增图片列 -->
-    </tr>
-    </thead>
-    <tbody>
-    {% for row in plate_recognition_data %}
-    <tr>
-      <td>{{ row.id }}</td>
-      <td>{{ row.plate_number }}</td>
-      <td>{{ row.recognition_result }}</td>
-      <td>{{ row.confidence }}</td>
-      <td>{{ row.timestamp }}</td>
-      <td><img src="data:image/jpeg;base64,{{ row.image_data|b64encode }}" alt="车牌图片" width="100"></td> <!-- 显示图片 -->
-    </tr>
-    {% endfor %}
-    </tbody>
-  </table>
+    <h1 class="text-center">车牌识别结果</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for data in datas %}
+        <div class="col">
+            <div class="card custom-card">
+                <img src="{{ data[2] }}" alt="车牌图片" class="card-img-top" id="img_Re">
+                <div class="card-body">
+                    <p class="card-title">车牌号码: {{ data[3] }}</p>
+                    <br>
+                    <p class="card-text">识别结果: {{ data[4] }}</p>
+                    <p class="card-text">识别时间: {{ data[5] }}</p>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
 </div>
 
+<!-- 引入Bootstrap的JS库 -->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>-->
 <script src="../static/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,19 @@
+/*图片样式*/
+img {
+    width: 50%;
+    height: 50%;
+}
+
+/*p标签美化，主要是识别结果文字展示的美化*/
+p {
+    color: #333; /* 文字颜色为深灰色 */
+    font-size: 16px; /* 文字大小为16像素 */
+    /*line-height: 1.5; !* 行高为文本大小的1.5倍 *!*/
+
+    /*让背景颜色和边框的长度与标签文字一样，可以用inline-block*/
+    display: inline-block;
+    background-color: #f2f2f2; /* 浅灰色背景 */
+    border: 1px solid #ccc; /* 1像素灰色边框 */
+    padding: 5px; /* 可选的填充 */
+    margin-top: 1px; /* 间隔*/
+}
