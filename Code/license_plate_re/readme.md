@@ -1,0 +1,3 @@
+# car_plate_re
+
+需要说明的是，车牌字符识别使用的算法是opencv的SVM， opencv的SVM使用代码来自于opencv附带的sample，StatModel类和SVM类都是sample中的代码
