@@ -12,7 +12,7 @@ import img_math as img_math
 
 
 def pic(pic_path):
-    predictor = predict.CardPredictor()
+    predictor = predict.CardPredictor()  # 创建CardPredictor的实例
     predictor.train_svm()
     img_bgr = img_math.img_read(pic_path)  # 读取图片可带中文路径
     cv2.imshow("img", img_bgr)

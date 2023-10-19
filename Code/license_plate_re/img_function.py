@@ -10,6 +10,7 @@ Min_Area = 2000  # 车牌区域允许最大面积
 PROVINCE_START = 1000
 
 
+# StatModel 父类
 class StatModel(object):
     def __init__(self):
         self.model = None
@@ -21,6 +22,7 @@ class StatModel(object):
         self.model.save(fn)
 
 
+# 子类
 class SVM(StatModel):
     def __init__(self, C=1, gamma=0.5):
         super().__init__()
@@ -36,6 +38,7 @@ class SVM(StatModel):
         return r[1].ravel()
 
 
+# 子类
 class CardPredictor:
     def __init__(self):
         self.modelchinese = None

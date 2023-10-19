@@ -170,7 +170,8 @@ def find_license(img):
 
 if __name__ == '__main__':
     # im_name = r"./images/川A88888.jpg"
-    im_name = r'./images/粤AAB457.JPG'
+    # im_name = r'./images/粤AAB457.JPG'
+    im_name = r'./images/川A09x20.jpg'
     orgimg = cv2.imdecode(np.fromfile(im_name, dtype=np.uint8), -1)  # 解决图片带中文路径报错
     img1 = orgimg.copy()
     rect, img = find_license(orgimg)
