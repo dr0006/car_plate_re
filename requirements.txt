@@ -1,7 +1,7 @@
-hyperlpr3==0.1.3
+# hyperlpr3==0.1.3
 #pillow PIL
 
-onnxruntime==1.8.1
+# onnxruntime==1.8.1
 
 # opencv-python==4.8.0.76
 # numpy==1.24.4
@@ -9,10 +9,10 @@ onnxruntime==1.8.1
 # uvicorn==0.23.2
 # requests==2.31.0
 
-PyQt5==5.15.9
+# PyQt5==5.15.9
 #-------------
 
-opencv-python==4.8.1.78
-numpy~=1.24.4
-matplotlib~=3.7.3
-paddleocr~=2.7.0.3
+# opencv-python==4.8.1.78
+# numpy~=1.24.4
+# matplotlib~=3.7.3
+# paddleocr~=2.7.0.3
